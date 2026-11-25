@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5efe4">
+  <meta name="description" content="오래된 유럽의 우아함과 오늘의 커피가 만나는 카페, 살롱 드 벨르">
+  <title>살롱 드 벨르 — 커피와 우아함이 머무는 곳</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Noto+Serif+KR:wght@400;500;600;700&display=swap');
+
+    :root {
+      --paper: #f5efe4;
+      --paper-light: #fbf8f1;
+      --ink: #30221d;
+      --muted: #75665b;
+      --wine: #762f39;
+      --wine-dark: #55232c;
+      --gold: #b08a50;
+      --line: #d9cbb5;
+      --serif: "Noto Serif KR", Georgia, serif;
+      --display: "DM Serif Display", Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wrap { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+
+    .topline {
+      padding: 10px 20px;
+      background: var(--wine-dark);
+      color: #f4e8d2;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: .16em;
+    }
+    header {
+      position: relative;
+      z-index: 3;
+      border-bottom: 1px solid var(--line);
+      background: rgba(245, 239, 228, .96);
+    }
+    .nav {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      color: var(--wine);
+      font-family: var(--display);
+      font-size: 22px;
+    }
+    .brand-name { font-size: 18px; font-weight: 600; letter-spacing: .08em; }
+    .brand-sub { display: block; margin-top: 3px; color: var(--muted); font: 10px var(--display); letter-spacing: .16em; }
+    .nav-links { display: flex; align-items: center; gap: 34px; font-size: 13px; }
+    .nav-links a { transition: color .2s; }
+    .nav-links a:hover { color: var(--wine); }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .bag-button, .menu-toggle {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .bag-button { padding: 10px 14px; font-size: 12px; }
+    .bag-button span { color: var(--wine); font-weight: 700; }
+    .menu-toggle { display: none; padding: 9px 11px; font-size: 18px; }
+
+    .hero {
+      display: grid;
+      min-height: 610px;
+      grid-template-columns: 1fr 1.08fr;
+      align-items: center;
+      gap: 6%;
+      padding-top: 44px;
+      padding-bottom: 66px;
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 20px;
+      color: var(--wine);
+      font-size: 11px;
+      letter-spacing: .2em;
+    }
+    .eyebrow::before { width: 30px; height: 1px; background: var(--gold); content: ""; }
+    h1 { margin: 0; font-size: clamp(42px, 5.4vw, 72px); font-weight: 500; line-height: 1.27; letter-spacing: -.06em; }
+    h1 em { color: var(--wine); font-style: normal; }
+    .hero-copy {
+      max-width: 430px;
+      margin: 22px 0 30px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 2;
+      word-break: keep-all;
+    }
+    .primary-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 22px;
+      padding: 14px 19px;
+      background: var(--wine);
+      color: #fff9ee;
+      font-size: 12px;
+      transition: background .2s, transform .2s;
+    }
+    .primary-link:hover { transform: translateY(-2px); background: var(--wine-dark); }
+    .primary-link span { font-size: 17px; }
+    .hero-note { display: flex; align-items: center; gap: 13px; margin-top: 42px; color: var(--muted); font-size: 11px; }
+    .hero-note strong { color: var(--ink); font-size: 13px; font-weight: 500; }
+    .note-line { width: 35px; height: 1px; background: var(--gold); }
+    .hero-visual { position: relative; padding: 18px 18px 34px 0; }
+    .hero-visual::before {
+      position: absolute;
+      inset: 0 0 0 18px;
+      border: 1px solid var(--gold);
+      content: "";
+    }
+    .hero-image {
+      position: relative;
+      min-height: 430px;
+      background: #6a4531 url("https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1200&q=85") center 52% / cover;
+    }
+    .image-caption {
+      position: absolute;
+      right: -14px;
+      bottom: 3px;
+      padding: 14px 19px;
+      background: var(--paper-light);
+      color: var(--wine);
+      font: 14px var(--display);
+      letter-spacing: .05em;
+    }
+    .image-caption small { display: block; margin-top: 4px; color: var(--muted); font: 10px var(--serif); letter-spacing: .08em; }
+    .ornament { color: var(--gold); font-size: 18px; letter-spacing: .25em; }
+
+    .marquee {
+      overflow: hidden;
+      padding: 17px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      color: var(--wine);
+      text-align: center;
+      font: 15px var(--display);
+      letter-spacing: .17em;
+      white-space: nowrap;
+    }
+    .marquee span { padding: 0 20px; color: var(--gold); }
+    section { scroll-margin-top: 24px; }
+    .menu-section { padding: 100px 0 106px; background: var(--paper-light); }
+    .section-heading { margin-bottom: 36px; text-align: center; }
+    .section-heading .eyebrow { justify-content: center; margin-bottom: 12px; }
+    .section-heading .eyebrow::after { width: 30px; height: 1px; background: var(--gold); content: ""; }
+    h2 { margin: 0; font-size: clamp(30px, 4vw, 43px); font-weight: 500; letter-spacing: -.04em; }
+    .section-intro { margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+    .filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; margin-bottom: 30px; }
+    .filter {
+      padding: 9px 17px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 11px;
+      transition: all .2s;
+    }
+    .filter:hover, .filter[aria-pressed="true"] { border-color: var(--wine); background: var(--wine); color: white; }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .menu-card {
+      overflow: hidden;
+      border: 1px solid #e6dccb;
+      background: #fffdf8;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .menu-card:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(67, 45, 28, .09); }
+    .menu-card[hidden] { display: none; }
+    .menu-photo { height: 205px; background-position: center; background-size: cover; }
+    .photo-espresso { background-image: url("https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=800&q=80"); }
+    .photo-latte { background-image: url("https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80"); }
+    .photo-cream { background-image: url("https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=800&q=80"); }
+    .photo-tart { background-image: url("https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=800&q=80"); }
+    .photo-cake { background-image: url("https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"); }
+    .photo-tea { background-image: url("https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80"); }
+    .menu-info { padding: 18px 19px 17px; }
+    .menu-category { color: var(--gold); font-size: 10px; letter-spacing: .16em; }
+    .menu-title { display: flex; justify-content: space-between; gap: 10px; margin: 7px 0 8px; font-size: 17px; font-weight: 500; }
+    .menu-price { color: var(--wine); font: 16px var(--display); white-space: nowrap; }
+    .menu-description { min-height: 42px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
+    .add-button {
+      margin-top: 15px;
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--wine);
+      cursor: pointer;
+      font-size: 11px;
+      transition: all .2s;
+    }
+    .add-button:hover { border-color: var(--wine); background: var(--wine); color: white; }
+
+    .story { padding: 94px 0; }
+    .story-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 9%; }
+    .story-image {
+      min-height: 360px;
+      border: 1px solid var(--gold);
+      outline: 1px solid var(--gold);
+      outline-offset: 7px;
+      background: #5b4537 url("https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=85") center / cover;
+    }
+    .story-copy .eyebrow { margin-bottom: 14px; }
+    .story-copy h2 { line-height: 1.5; }
+    .story-copy p:not(.eyebrow) { color: var(--muted); font-size: 13px; line-height: 2.2; word-break: keep-all; }
+    .story-signature { margin-top: 25px; color: var(--wine); font: 22px var(--display); }
+
+    .visit { padding: 70px 0; background: #eae0cf; }
+    .visit-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; text-align: center; }
+    .visit-item + .visit-item { border-left: 1px solid #cdbd9f; }
+    .visit-icon { color: var(--wine); font-size: 19px; }
+    .visit-item h3 { margin: 10px 0 7px; font-size: 14px; font-weight: 500; }
+    .visit-item p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.9; }
+    footer { padding: 29px 0; background: var(--wine-dark); color: #f4e8d2; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .footer-brand { font-size: 14px; letter-spacing: .1em; }
+    .footer-copy { color: #d5c3a9; font-size: 10px; }
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 5;
+      padding: 14px 18px;
+      background: var(--wine-dark);
+      color: white;
+      font-size: 12px;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity .2s, transform .2s;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 34px, 560px); }
+      .topline { font-size: 9px; }
+      .nav { min-height: 70px; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        position: absolute;
+        top: 69px;
+        right: 0;
+        left: 0;
+        display: none;
+        padding: 18px 24px 23px;
+        border-bottom: 1px solid var(--line);
+        background: var(--paper);
+      }
+      .nav-links.open { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+      .bag-button { padding: 9px 10px; font-size: 10px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 35px; padding-top: 55px; padding-bottom: 55px; }
+      .hero-copy { font-size: 13px; }
+      .hero-note { margin-top: 27px; }
+      .hero-visual { margin-right: 7px; }
+      .hero-image { min-height: 330px; }
+      .menu-section { padding: 72px 0; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 13px; }
+      .menu-photo { height: 155px; }
+      .menu-info { padding: 14px 12px; }
+      .menu-title { font-size: 14px; }
+      .menu-price { font-size: 14px; }
+      .menu-description { font-size: 10px; }
+      .story { padding: 72px 0; }
+      .story-grid { grid-template-columns: 1fr; gap: 33px; }
+      .story-image { min-height: 290px; margin: 0 8px; }
+      .visit-grid { grid-template-columns: 1fr; gap: 25px; }
+      .visit-item + .visit-item { padding-top: 23px; border-top: 1px solid #cdbd9f; border-left: 0; }
+    }
+    @media (max-width: 420px) {
+      .brand-name { font-size: 15px; }
+      .brand-mark { width: 37px; height: 37px; }
+      .nav-right { gap: 7px; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .menu-photo { height: 210px; }
+      .footer-row { align-items: flex-start; flex-direction: column; gap: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline">A LITTLE EUROPEAN ELEGANCE IN YOUR EVERYDAY · 매일의 순간에 우아함 한 스푼</div>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="살롱 드 벨르 홈">
+        <span class="brand-mark" aria-hidden="true">B</span>
+        <span><span class="brand-name">살롱 드 벨르</span><span class="brand-sub">SALON DE BELLE</span></span>
+      </a>
+      <nav class="nav-links" id="site-nav" aria-label="주요 메뉴">
+        <a href="#home">홈</a>
+        <a href="#menu">메뉴</a>
+        <a href="#story">우리의 이야기</a>
+        <a href="#visit">찾아오시는 길</a>
+      </nav>
+      <div class="nav-right">
+        <a class="bag-button" href="#menu">ORDER <span id="bag-count">0</span></a>
+        <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="site-nav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero" id="home">
+      <div class="hero-copy-wrap">
+        <p class="eyebrow">A BAROQUE CAFÉ</p>
+        <h1>커피 한 잔에<br><em>머무는 우아함</em></h1>
+        <p class="hero-copy">시간이 천천히 흐르는 살롱에서 갓 내린 커피와 달콤한 디저트를 만나보세요. 오늘의 평범한 순간이 오래 기억될 장면이 되도록.</p>
+        <a class="primary-link" href="#menu">메뉴 둘러보기 <span aria-hidden="true">↗</span></a>
+        <div class="hero-note"><span class="note-line"></span><span><strong>매일, 정성스럽게</strong><br>좋은 원두와 제철 재료로 만듭니다</span></div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-image" role="img" aria-label="고풍스럽고 따뜻한 분위기의 카페"></div>
+        <div class="image-caption">A moment to savor<small>당신을 위한 작은 여유</small></div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-label="커피와 디저트, 그리고 여유">
+      COFFEE <span>✦</span> PÂTISSERIE <span>✦</span> SLOW MOMENTS <span>✦</span> COFFEE <span>✦</span> PÂTISSERIE
+    </div>
+
+    <section class="menu-section" id="menu">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">OUR SIGNATURE</p>
+          <h2>살롱의 메뉴</h2>
+          <p class="section-intro">한 잔의 커피, 한 조각의 달콤함. 오늘의 취향을 골라보세요.</p>
+        </div>
+        <div class="filters" role="group" aria-label="메뉴 분류">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">전체 메뉴</button>
+          <button class="filter" type="button" data-filter="coffee" aria-pressed="false">커피</button>
+          <button class="filter" type="button" data-filter="dessert" aria-pressed="false">디저트</button>
+          <button class="filter" type="button" data-filter="tea" aria-pressed="false">티 & 음료</button>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card" data-category="coffee">
+            <div class="menu-photo photo-espresso" role="img" aria-label="크레마가 풍부한 에스프레소"></div>
+            <div class="menu-info"><span class="menu-category">COFFEE</span><h3 class="menu-title">벨르 에스프레소 <span class="menu-price">₩4,000</span></h3><p class="menu-description">다크 초콜릿의 여운과 고소한 크레마를 담은 시그니처 블렌드.</p><button class="add-button" type="button" data-name="벨르 에스프레소">담기 +</button></div>
+          </article>
+          <article class="menu-card" data-category="coffee">
+            <div class="menu-photo photo-latte" role="img" aria-label="부드러운 라테 아트가 올라간 카페라테"></div>
+            <div class="menu-info"><span class="menu-category">COFFEE</span><h3 class="menu-title">로즈 라테 <span class="menu-price">₩5,500</span></h3><p class="menu-description">벨벳처럼 부드러운 우유 거품에 장미 향을 살짝 더했어요.</p><button class="add-button" type="button" data-name="로즈 라테">담기 +</button></div>
+          </article>
+          <article class="menu-card" data-category="coffee">
+            <div class="menu-photo photo-cream" role="img" aria-label="크림이 올라간 달콤한 커피"></div>
+            <div class="menu-info"><span class="menu-category">COFFEE</span><h3 class="menu-title">살롱 아인슈페너 <span class="menu-price">₩6,000</span></h3><p class="menu-description">진한 콜드브루 위에 바닐라 크림을 풍성하게 올린 한 잔.</p><button class="add-button" type="button" data-name="살롱 아인슈페너">담기 +</button></div>
+          </article>
+          <article class="menu-card" data-category="dessert">
+            <div class="menu-photo photo-tart" role="img" aria-label="과일과 크림을 곁들인 타르트"></div>
+            <div class="menu-info"><span class="menu-category">DESSERT</span><h3 class="menu-title">계절 과일 타르트 <span class="menu-price">₩7,500</span></h3><p class="menu-description">바삭한 타르트 쉘에 제철 과일과 수제 커스터드 크림.</p><button class="add-button" type="button" data-name="계절 과일 타르트">담기 +</button></div>
+          </article>
+          <article class="menu-card" data-category="dessert">
+            <div class="menu-photo photo-cake" role="img" aria-label="초콜릿 케이크 한 조각"></div>
+            <div class="menu-info"><span class="menu-category">DESSERT</span><h3 class="menu-title">벨벳 초콜릿 케이크 <span class="menu-price">₩7,000</span></h3><p class="menu-description">깊고 진한 카카오와 가벼운 생크림이 어우러진 케이크.</p><button class="add-button" type="button" data-name="벨벳 초콜릿 케이크">담기 +</button></div>
+          </article>
+          <article class="menu-card" data-category="tea">
+            <div class="menu-photo photo-tea" role="img" aria-label="향긋한 찻잎을 우려낸 차"></div>
+            <div class="menu-info"><span class="menu-category">TEA</span><h3 class="menu-title">얼그레이 블루밍 티 <span class="menu-price">₩5,500</span></h3><p class="menu-description">베르가못 향이 은은하게 퍼지는 여유로운 오후의 티.</p><button class="add-button" type="button" data-name="얼그레이 블루밍 티">담기 +</button></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="story" id="story">
+      <div class="wrap story-grid">
+        <div class="story-image" role="img" aria-label="따뜻한 햇살이 비치는 살롱 드 벨르"></div>
+        <div class="story-copy">
+          <p class="eyebrow">OUR STORY</p>
+          <h2>오래된 살롱처럼,<br>편안하고 다정하게</h2>
+          <p>살롱 드 벨르는 바쁜 하루 한가운데 작은 쉼표를 놓아드리고 싶어 시작했습니다. 손으로 고른 원두, 매일 아침 굽는 디저트, 그리고 오래 머물고 싶은 공간. 이곳에서 당신만의 느긋한 시간을 발견해 보세요.</p>
+          <div class="story-signature">À bientôt, Belle.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit" id="visit">
+      <div class="wrap visit-grid">
+        <div class="visit-item"><div class="visit-icon" aria-hidden="true">⌖</div><h3>살롱으로 오시는 길</h3><p>서울시 종로구 서순라길 12<br>종로3가역 7번 출구에서 도보 5분</p></div>
+        <div class="visit-item"><div class="visit-icon" aria-hidden="true">◷</div><h3>영업 시간</h3><p>매일 11:00 – 21:00<br>커피 라스트 오더 20:30</p></div>
+        <div class="visit-item"><div class="visit-icon" aria-hidden="true">✉</div><h3>예약 및 문의</h3><p>02-555-1930<br>단체 예약은 전화로 문의해 주세요</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <div class="footer-brand">살롱 드 벨르 <span class="ornament">✦</span> SALON DE BELLE</div>
+      <div class="footer-copy">© <span id="year"></span> SALON DE BELLE · 커피와 우아함이 머무는 곳</div>
+    </div>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const filterButtons = document.querySelectorAll(".filter");
+    const menuCards = document.querySelectorAll(".menu-card");
+    const bagCount = document.getElementById("bag-count");
+    const toast = document.getElementById("toast");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    let itemCount = 0;
+    let toastTimer;
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const category = button.dataset.filter;
+        filterButtons.forEach((filter) => filter.setAttribute("aria-pressed", String(filter === button)));
+        menuCards.forEach((card) => {
+          card.hidden = category !== "all" && card.dataset.category !== category;
+        });
+      });
+    });
+
+    document.querySelectorAll(".add-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        itemCount += 1;
+        bagCount.textContent = itemCount;
+        toast.textContent = `${button.dataset.name} 메뉴를 담았습니다. (총 ${itemCount}개)`;
+        toast.classList.add("show");
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => toast.classList.remove("show"), 2400);
+      });
+    });
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "메뉴 열기" : "메뉴 닫기");
+      navLinks.classList.toggle("open", !isOpen);
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "메뉴 열기");
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
