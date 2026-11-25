@@ -16,10 +16,38 @@
       --muted: #75665b;
       --wine: #762f39;
       --wine-dark: #55232c;
+      --wine-button: #762f39;
+      --wine-button-hover: #55232c;
       --gold: #b08a50;
       --line: #d9cbb5;
+      --header-bg: rgba(245, 239, 228, .96);
+      --card-bg: #fffdf8;
+      --card-line: #e6dccb;
+      --card-shadow: rgba(67, 45, 28, .09);
+      --visit-bg: #eae0cf;
+      --visit-line: #cdbd9f;
       --serif: "Noto Serif KR", Georgia, serif;
       --display: "DM Serif Display", Georgia, serif;
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --paper: #211b19;
+      --paper-light: #2c2421;
+      --ink: #f2e9dc;
+      --muted: #c1b2a2;
+      --wine: #dda4a4;
+      --wine-dark: #211516;
+      --wine-button: #74303a;
+      --wine-button-hover: #59232c;
+      --gold: #d2b178;
+      --line: #55463d;
+      --header-bg: rgba(33, 27, 25, .97);
+      --card-bg: #342b27;
+      --card-line: #4d4038;
+      --card-shadow: rgba(0, 0, 0, .28);
+      --visit-bg: #322824;
+      --visit-line: #55463d;
     }
 
     * { box-sizing: border-box; }
@@ -47,7 +75,7 @@
       position: relative;
       z-index: 3;
       border-bottom: 1px solid var(--line);
-      background: rgba(245, 239, 228, .96);
+      background: var(--header-bg);
     }
     .nav {
       min-height: 82px;
@@ -74,7 +102,7 @@
     .nav-links a { transition: color .2s; }
     .nav-links a:hover { color: var(--wine); }
     .nav-right { display: flex; align-items: center; gap: 12px; }
-    .bag-button, .menu-toggle {
+    .bag-button, .theme-toggle, .menu-toggle {
       border: 1px solid var(--line);
       background: transparent;
       color: var(--ink);
@@ -82,6 +110,7 @@
     }
     .bag-button { padding: 10px 14px; font-size: 12px; }
     .bag-button span { color: var(--wine); font-weight: 700; }
+    .theme-toggle { min-width: 40px; min-height: 40px; padding: 7px; font-size: 18px; line-height: 1; }
     .menu-toggle { display: none; padding: 9px 11px; font-size: 18px; }
 
     .hero {
@@ -118,12 +147,12 @@
       align-items: center;
       gap: 22px;
       padding: 14px 19px;
-      background: var(--wine);
+      background: var(--wine-button);
       color: #fff9ee;
       font-size: 12px;
       transition: background .2s, transform .2s;
     }
-    .primary-link:hover { transform: translateY(-2px); background: var(--wine-dark); }
+    .primary-link:hover { transform: translateY(-2px); background: var(--wine-button-hover); }
     .primary-link span { font-size: 17px; }
     .hero-note { display: flex; align-items: center; gap: 13px; margin-top: 42px; color: var(--muted); font-size: 11px; }
     .hero-note strong { color: var(--ink); font-size: 13px; font-weight: 500; }
@@ -182,15 +211,15 @@
       font-size: 11px;
       transition: all .2s;
     }
-    .filter:hover, .filter[aria-pressed="true"] { border-color: var(--wine); background: var(--wine); color: white; }
+    .filter:hover, .filter[aria-pressed="true"] { border-color: var(--wine-button); background: var(--wine-button); color: white; }
     .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
     .menu-card {
       overflow: hidden;
-      border: 1px solid #e6dccb;
-      background: #fffdf8;
-      transition: transform .25s, box-shadow .25s;
+      border: 1px solid var(--card-line);
+      background: var(--card-bg);
+      transition: transform .25s, box-shadow .25s, background-color .25s, border-color .25s;
     }
-    .menu-card:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(67, 45, 28, .09); }
+    .menu-card:hover { transform: translateY(-5px); box-shadow: 0 14px 30px var(--card-shadow); }
     .menu-card[hidden] { display: none; }
     .menu-photo { height: 205px; background-position: center; background-size: cover; }
     .photo-espresso { background-image: url("https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=800&q=80"); }
@@ -214,7 +243,7 @@
       font-size: 11px;
       transition: all .2s;
     }
-    .add-button:hover { border-color: var(--wine); background: var(--wine); color: white; }
+    .add-button:hover { border-color: var(--wine-button); background: var(--wine-button); color: white; }
 
     .story { padding: 94px 0; }
     .story-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 9%; }
@@ -230,9 +259,9 @@
     .story-copy p:not(.eyebrow) { color: var(--muted); font-size: 13px; line-height: 2.2; word-break: keep-all; }
     .story-signature { margin-top: 25px; color: var(--wine); font: 22px var(--display); }
 
-    .visit { padding: 70px 0; background: #eae0cf; }
+    .visit { padding: 70px 0; background: var(--visit-bg); }
     .visit-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; text-align: center; }
-    .visit-item + .visit-item { border-left: 1px solid #cdbd9f; }
+    .visit-item + .visit-item { border-left: 1px solid var(--visit-line); }
     .visit-icon { color: var(--wine); font-size: 19px; }
     .visit-item h3 { margin: 10px 0 7px; font-size: 14px; font-weight: 500; }
     .visit-item p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.9; }
@@ -289,7 +318,7 @@
       .story-grid { grid-template-columns: 1fr; gap: 33px; }
       .story-image { min-height: 290px; margin: 0 8px; }
       .visit-grid { grid-template-columns: 1fr; gap: 25px; }
-      .visit-item + .visit-item { padding-top: 23px; border-top: 1px solid #cdbd9f; border-left: 0; }
+      .visit-item + .visit-item { padding-top: 23px; border-top: 1px solid var(--visit-line); border-left: 0; }
     }
     @media (max-width: 420px) {
       .brand-name { font-size: 15px; }
@@ -320,6 +349,7 @@
       </nav>
       <div class="nav-right">
         <a class="bag-button" href="#menu">ORDER <span id="bag-count">0</span></a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false" title="다크 모드로 전환"><span aria-hidden="true">☾</span></button>
         <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="site-nav">☰</button>
       </div>
     </div>
@@ -425,8 +455,18 @@
     const toast = document.getElementById("toast");
     const menuToggle = document.querySelector(".menu-toggle");
     const navLinks = document.querySelector(".nav-links");
+    const themeToggle = document.getElementById("theme-toggle");
     let itemCount = 0;
     let toastTimer;
+
+    themeToggle.addEventListener("click", () => {
+      const isDark = document.documentElement.dataset.theme !== "dark";
+      document.documentElement.dataset.theme = isDark ? "dark" : "light";
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      themeToggle.setAttribute("aria-label", isDark ? "라이트 모드로 전환" : "다크 모드로 전환");
+      themeToggle.title = isDark ? "라이트 모드로 전환" : "다크 모드로 전환";
+      themeToggle.firstElementChild.textContent = isDark ? "☀" : "☾";
+    });
 
     filterButtons.forEach((button) => {
       button.addEventListener("click", () => {
